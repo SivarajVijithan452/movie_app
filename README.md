@@ -1,70 +1,107 @@
-# Getting Started with Create React App
+## Project Overview
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The Movie App is a modern web application built using React, a popular JavaScript library for building user interfaces. The application leverages React hooks such as `useState`, `useEffect`, and `useMemo` to manage state, handle side effects, and optimize performance. For routing, the app utilizes `react-router-dom`, enabling navigation between different views like Home, Favorites, Movie Details, and Search Results.
 
-## Available Scripts
+### Development and Technologies
 
-In the project directory, you can run:
+The application is developed with a focus on clean, maintainable code and a responsive user interface. It follows component-based architecture, where reusable components and pages are organized in a modular structure. The `react-router-dom` library is employed to handle client-side routing, allowing users to navigate between pages seamlessly. React Context is used for managing global state, particularly for handling movie favorites.
 
-### `npm start`
+### Data Handling
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Movie data is fetched from a local JSON file (`data.json`) located in the `public/data/` directory. This file contains an array of movie objects with details such as `id`, `title`, `imageUrl`, `year`, `genre`, `synopsis`, and optionally `rating`. The `useEffect` hook is used to load this data when the application initializes. For searching, the app filters the movie list based on user queries and updates the view dynamically.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Code Structure
 
-### `npm test`
+The project is structured with a clear separation of concerns:
+- **Components**: Reusable UI elements and functional components are stored in the `src/components/` directory.
+- **Pages**: Different page views like Home, Favorites, Details, and Search are located in the `src/pages/` directory.
+- **Contexts**: Application-wide state management is handled by context providers found in `src/contexts/`.
+- **App.js**: The central component that configures routing and renders the appropriate page based on the URL.
+- **Index.js**: The entry point of the application, which initializes and renders the `App` component into the DOM.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **`src/components/`**: Contains reusable UI components used across the application.
+- **`src/pages/`**: Contains page components for different views such as Home, Favorites, Details, and Search.
+- **`src/contexts/`**: Includes context providers for global state management.
+- **`src/App.js`**: The main component that sets up routing and renders the page components.
+- **`src/index.js`**: The entry point that initializes and renders the `App` component into the DOM.
+- **`public/data/data.json`**: Contains movie data used by the application.
 
-### `npm run build`
+The code efficiently manages state and side effects to deliver a smooth user experience. For instance, the `Home` component fetches and displays movies with pagination and genre filtering, while the `Favorite` component allows users to manage their list of favorite movies. The `SearchPage` component provides real-time search functionality by filtering movies based on user input. This approach ensures that the application is both functional and responsive, providing a user-friendly experience across different devices.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Technologies Used
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **React**: For building the user interface with a component-based approach.
+- **React Router**: For client-side routing and navigation.
+- **React Context**: For global state management.
+- **Tailwind CSS**: For utility-first CSS styling and responsive design.
 
-### `npm run eject`
+### Design and CSS Setup
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The application's design is centered around a clean, modern aesthetic with a dark theme to enhance readability and visual appeal. CSS is handled using Tailwind CSS, a utility-first CSS framework that simplifies the styling process and ensures a responsive design across different devices.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Tailwind CSS Integration
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. **Installation**: Tailwind CSS is installed via npm:
+npm install tailwindcss
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Context Usage
 
-## Learn More
+The Movie App leverages React Context for managing global state, specifically for handling the favorites feature. React Context provides a way to share state across components without the need for prop drilling, which is especially useful in a large application where multiple components need to access and update the same data.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Why Use React Context?
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+In this application, React Context is used to manage the list of favorite movies across different components. This approach was chosen for several reasons:
 
-### Code Splitting
+1. **Global State Management**: The favorites data needs to be accessible from various parts of the application, including the Home page, Favorite page, and Details page. React Context allows us to maintain this global state efficiently.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. **Avoid Prop Drilling**: Without Context, passing the favorites state and related functions through multiple layers of components (prop drilling) would be cumbersome and error-prone. Context simplifies the state management by providing a central place to access and update the data.
 
-### Analyzing the Bundle Size
+3. **Separation of Concerns**: By using Context, we separate the state management logic from the UI components, making the codebase more modular and easier to maintain.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Functions in Context
 
-### Making a Progressive Web App
+The `FavoritesContext` provides several functions to manage the favorites state. Here’s a breakdown of each function:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. **`addFavorite(movie)`**:
+   - **Purpose**: Adds a movie to the list of favorites.
+   - **How It Works**: This function is called with a movie object, and it updates the state by adding the movie to the `favorites` array.
+   - **Usage**: This function is used when a user clicks the "Add to Favorites" button on a movie card.
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+In the Movie App, we use `FavoritesContext` to manage the global state related to user favorites. This approach was chosen for several key reasons:
 
-### Deployment
+1. **Centralized State Management**: The `FavoritesContext` provides a centralized place to manage the state of favorite movies across different components. This centralization helps avoid prop drilling, which can become cumbersome when passing state through multiple levels of nested components.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+2. **Persistence Across Sessions**: By utilizing the browser's local storage, the `FavoritesContext` ensures that user preferences are persisted across different sessions. This means that the list of favorite movies remains intact even if the user closes and reopens the application. The context initializes the state with saved favorites from local storage and updates it whenever changes are made.
 
-### `npm run build` fails to minify
+3. **Separation of Concerns**: The `FavoritesContext` helps keep the state management logic separate from the UI components. This separation promotes better organization of code and makes it easier to maintain and test.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### How It Works
+
+The `FavoritesContext` is implemented as follows:
+
+The FavoritesProvider component initializes the favorites state with data from local storage or as an empty array if no data is found. It provides functions to manage the favorites, such as adding or removing movies, and checking if a movie is already favorited.
+
+addFavorite(movie): Adds a movie to the favorites list and updates local storage.
+removeFavorite(id): Removes a movie from the favorites list based on its ID and updates local storage.
+isFavorite(id): Checks if a movie is in the favorites list by its ID.
+
+## Installation Instructions
+
+To set up and run this project follow these steps:
+
+### Prerequisites
+
+Ensure you have the following installed on your computer:
+
+- **Node.js**: Version 14.x or higher
+- **npm** (Node Package Manager): Comes with Node.js installation
+
+### 1. Clone the Repository
+
+Start by cloning the repository to your local machine. Open your terminal and run:
+
+git clone https://github.com/SivarajVijithan452/movie_app.git
+
+
