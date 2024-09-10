@@ -104,4 +104,6 @@ Start by cloning the repository to your local machine. Open your terminal and ru
 
 git clone https://github.com/SivarajVijithan452/movie_app.git
 
-
+### 2 Run terminal
+npm install
+npm start
